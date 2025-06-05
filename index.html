@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free online clock tools: stopwatch, countdown, world clock, and reminders">
+  <meta name="keywords" content="online clock, stopwatch, countdown, world clock, reminder">
+  <meta name="author" content="Your Site Name">
+  <title>Simple Clock Tools</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: white;
+      color: black;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    .dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+    h2 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    .theme-selector {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Simple Clock Tools</h1>
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <div class="theme-selector">
+      <label for="themeSelect">Select Theme Color:</label>
+      <select id="themeSelect" onchange="applyTheme(this.value)">
+        <option value="default">Default</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="pink">Pink</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <section id="countdown">
+      <h2>Countdown to Date</h2>
+      <p>Select a future date and time:</p>
+      <input type="datetime-local" id="countdownInput">
+      <button onclick="startCountdown()">Start Countdown</button>
+      <p id="countdownDisplay"></p>
+    </section>
+
+    <section id="world">
+      <h2>World Clock</h2>
+      <p>New York: <span id="nyClock"></span></p>
+      <p>London: <span id="ldnClock"></span></p>
+      <p>Tokyo: <span id="tokyoClock"></span></p>
+      <p>California: <span id="caClock"></span></p>
+    </section>
+
+    <section id="reminder">
+      <h2>Special Reminder</h2>
+      <p>Set a date to be reminded (browser must stay open):</p>
+      <input type="datetime-local" id="reminderInput">
+      <select id="soundSelect">
+        <option value="digital_watch_alarm_long.ogg">Digital Alarm</option>
+        <option value="bell.ogg">Bell</option>
+        <option value="doorbell.ogg">Doorbell</option>
+      </select>
+      <button onclick="setReminder()">Set Reminder</button>
+      <p id="reminderStatus"></p>
+      <audio id="reminderSound" preload="auto"></audio>
+    </section>
+  </main>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function applyTheme(theme) {
+      const root = document.documentElement;
+      switch(theme) {
+        case "blue":
+          document.body.style.color = "#0044cc";
+          break;
+        case "green":
+          document.body.style.color = "#228B22";
+          break;
+        case "pink":
+          document.body.style.color = "#cc3366";
+          break;
+        default:
+          document.body.style.color = "";
+      }
+    }
+
+    let countdownInterval;
+    function startCountdown() {
+      const input = document.getElementById("countdownInput").value;
+      const display = document.getElementById("countdownDisplay");
+      const endTime = new Date(input);
+      if (!input || endTime <= new Date()) {
+        display.textContent = "Please select a valid future date and time.";
+        return;
+      }
+      clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        const now = new Date();
+        const diff = endTime - now;
+        if (diff <= 0) {
+          clearInterval(countdownInterval);
+          display.textContent = "🎉 Countdown Complete!";
+          return;
+        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / (1000 * 60)) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+        display.textContent = `${days}d ${hrs}h ${mins}m ${secs}s`;
+      }, 1000);
+    }
+
+    function updateWorldClock() {
+      const now = new Date();
+      document.getElementById("nyClock").textContent = now.toLocaleTimeString("en-US", { timeZone: "America/New_York" });
+      document.getElementById("ldnClock").textContent = now.toLocaleTimeString("en-GB", { timeZone: "Europe/London" });
+      document.getElementById("tokyoClock").textContent = now.toLocaleTimeString("ja-JP", { timeZone: "Asia/Tokyo" });
+      document.getElementById("caClock").textContent = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles" });
+    }
+    setInterval(updateWorldClock, 1000);
+    updateWorldClock();
+
+    let reminderTimeout;
+    function setReminder() {
+      const input = document.getElementById("reminderInput").value;
+      const status = document.getElementById("reminderStatus");
+      const reminderSound = document.getElementById("reminderSound");
+      const soundFile = document.getElementById("soundSelect").value;
+
+      if (!input) {
+        status.textContent = "Please select a valid date and time.";
+        return;
+      }
+      const reminderTime = new Date(input);
+      const now = new Date();
+      if (reminderTime <= now) {
+        status.textContent = "Date/time must be in the future.";
+        return;
+      }
+      reminderSound.src = `https://actions.google.com/sounds/v1/alarms/${soundFile}`;
+      const ms = reminderTime - now;
+      clearTimeout(reminderTimeout);
+      reminderTimeout = setTimeout(() => {
+        reminderSound.play();
+        alert("🔔 Reminder: Your special day has arrived!");
+      }, ms);
+      status.textContent = `Reminder set for ${reminderTime.toLocaleString()}`;
+    }
+  </script>
+</body>
+</html>
