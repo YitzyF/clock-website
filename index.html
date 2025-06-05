@@ -120,21 +120,28 @@
 </head>
 <body>
   <header>
-    <div class="logo-title">
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/clock--v1.png" alt="Logo" class="logo">
-      <h1>Simple Clock Tools</h1>
-    </div>
-    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    <div class="theme-selector">
-      <label for="themeSelect">Select Theme Color:</label>
-      <select id="themeSelect" onchange="applyTheme(this.value)">
-        <option value="default">Default</option>
-        <option value="blue">Blue</option>
-        <option value="green">Green</option>
-        <option value="pink">Pink</option>
-      </select>
-    </div>
-  </header>
+  <div class="logo-title">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/clock--v1.png" alt="Logo" class="logo">
+    <h1>Simple Clock Tools</h1>
+  </div>
+  <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  <div class="theme-selector">
+    <label for="themeSelect">Select Theme Color:</label>
+    <select id="themeSelect" onchange="applyTheme(this.value)">
+      <option value="default">Default</option>
+      <option value="blue">Blue</option>
+      <option value="green">Green</option>
+      <option value="pink">Pink</option>
+    </select>
+  </div>
+
+  <!-- New Time & Date Display -->
+  <div id="timeDateDisplay" style="margin-top:15px; font-size:1.5em; font-weight:600; color:white;">
+    <div id="currentDate"></div>
+    <div id="currentTime" style="font-size:2em; margin-top:5px;"></div>
+  </div>
+</header>
+
 
   <main>
     <section id="countdown">
@@ -373,6 +380,18 @@ function playAlarmSound() {
   const audio = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
   audio.play();
 }
+function updateTimeDate() {
+  const now = new Date();
+  const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const currentDate = now.toLocaleDateString(undefined, optionsDate);
+  const currentTime = now.toLocaleTimeString();
+
+  document.getElementById('currentDate').textContent = currentDate;
+  document.getElementById('currentTime').textContent = currentTime;
+}
+
+setInterval(updateTimeDate, 1000);
+updateTimeDate();  // initial call
 
   </script>
 </body>
