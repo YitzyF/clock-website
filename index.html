@@ -154,6 +154,18 @@
       <button onclick="resetStopwatch()">Reset</button>
     </section>
 
+    <section id="alarm">
+  <h2>Alarm Clock</h2>
+  <p>Select a time to set the alarm:</p>
+  <input type="time" id="alarmTime">
+  <input type="text" id="alarmLabel" placeholder="Optional label">
+  <br><br>
+  <button onclick="setAlarm()">Set Alarm</button>
+  <button onclick="clearAlarm()">Clear Alarm</button>
+  <p id="alarmStatus">No alarm set.</p>
+</section>
+
+    
     <section id="world">
       <h2>World Clock</h2>
       <p>New York: <span id="nyClock"></span></p>
@@ -322,6 +334,46 @@
       }, ms);
       status.textContent = `Reminder set for ${reminderTime.toLocaleString()}`;
     }
+ let alarmTimeout = null;
+
+function setAlarm() {
+  const timeInput = document.getElementById("alarmTime").value;
+  const label = document.getElementById("alarmLabel").value || "⏰ Alarm!";
+  const status = document.getElementById("alarmStatus");
+
+  if (!timeInput) {
+    status.textContent = "❗ Please select a time.";
+    return;
+  }
+
+  const now = new Date();
+  const [hour, minute] = timeInput.split(":");
+  const alarmTime = new Date();
+  alarmTime.setHours(hour, minute, 0, 0);
+
+  if (alarmTime <= now) alarmTime.setDate(alarmTime.getDate() + 1); // next day
+
+  const timeUntilAlarm = alarmTime - now;
+
+  alarmTimeout = setTimeout(() => {
+    alert(label);
+    playAlarmSound();
+    status.textContent = "✅ Alarm triggered.";
+  }, timeUntilAlarm);
+
+  status.textContent = `⏰ Alarm set for ${alarmTime.toLocaleTimeString()}`;
+}
+
+function clearAlarm() {
+  clearTimeout(alarmTimeout);
+  document.getElementById("alarmStatus").textContent = "Alarm cleared.";
+}
+
+function playAlarmSound() {
+  const audio = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
+  audio.play();
+}
+
   </script>
 </body>
 </html>
