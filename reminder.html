@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Online Reminder & Alarm - Set Custom Reminders</title>
+  <meta name="description" content="Set reminders and alarms online. Get notifications with sound alerts at your chosen time." />
+  <meta name="keywords" content="reminder, alarm, online alarm, set reminder, alarm clock, notification" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    input, button {
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+    }
+    #message {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Set a Reminder / Alarm</h1>
+  <p>Pick a time and enter a message to get reminded.</p>
+
+  <label for="reminderTime">Reminder Time:</label><br />
+  <input type="time" id="reminderTime" required /><br />
+
+  <label for="reminderText">Reminder Message:</label><br />
+  <input type="text" id="reminderText" placeholder="Enter your message" required /><br />
+
+  <button onclick="setReminder()">Set Reminder</button>
+
+  <div id="message"></div>
+
+  <audio id="alarmSound" src="alarm.mp3" preload="auto"></audio>
+
+  <script>
+    let reminderTimeout;
+
+    function setReminder() {
+      clearTimeout(reminderTimeout);
+
+      const timeInput = document.getElementById('reminderTime').value;
+      const messageInput = document.getElementById('reminderText').value.trim();
+
+      if (!timeInput || !messageInput) {
+        alert('Please enter both time and message.');
+        return;
+      }
+
+      const now = new Date();
+      const [hours, minutes] = timeInput.split(':').map(Number);
+      const reminderTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, 0);
+
+      // If reminder time has already passed today, set for tomorrow
+      if (reminderTime <= now) {
+        reminderTime.setDate(reminderTime.getDate() + 1);
+      }
+
+      const timeToReminder = reminderTime - now;
+
+      document.getElementById('message').textContent = `Reminder set for ${reminderTime.toLocaleTimeString()}`;
+
+      reminderTimeout = setTimeout(() => {
+        alert(messageInput);
+        document.getElementById('alarmSound').play();
+      }, timeToReminder);
+    }
+  </script>
+</body>
+</html>
