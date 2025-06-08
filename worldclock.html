@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Online World Clock - Current Time in Cities Worldwide</title>
+  <meta name="description" content="Check the current time in major cities around the world. Online world clock with multiple city times." />
+  <meta name="keywords" content="world clock, time zones, current time, cities time, online clock, international time" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 90%;
+      max-width: 600px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.5rem 1rem;
+    }
+    th {
+      background-color: #333;
+      color: white;
+    }
+    td {
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>World Clock</h1>
+  <p>Current time in major cities around the world:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>City</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody id="clockTableBody">
+      <!-- Time rows will be inserted here -->
+    </tbody>
+  </table>
+
+  <script>
+    const cities = [
+      { name: 'New York, USA', timezone: 'America/New_York' },
+      { name: 'London, UK', timezone: 'Europe/London' },
+      { name: 'Paris, France', timezone: 'Europe/Paris' },
+      { name: 'Tokyo, Japan', timezone: 'Asia/Tokyo' },
+      { name: 'Sydney, Australia', timezone: 'Australia/Sydney' },
+      { name: 'Moscow, Russia', timezone: 'Europe/Moscow' },
+      { name: 'Dubai, UAE', timezone: 'Asia/Dubai' },
+      { name: 'Beijing, China', timezone: 'Asia/Shanghai' },
+      { name: 'Los Angeles, USA', timezone: 'America/Los_Angeles' },
+      { name: 'São Paulo, Brazil', timezone: 'America/Sao_Paulo' }
+    ];
+
+    function updateTimes() {
+      const tbody = document.getElementById('clockTableBody');
+      tbody.innerHTML = '';
+
+      const now = new Date();
+
+      cities.forEach(city => {
+        const timeString = now.toLocaleTimeString('en-US', {
+          timeZone: city.timezone,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        });
+
+        const row = document.createElement('tr');
+        const cityCell = document.createElement('td');
+        cityCell.textContent = city.name;
+        const timeCell = document.createElement('td');
+        timeCell.textContent = timeString;
+
+        row.appendChild(cityCell);
+        row.appendChild(timeCell);
+        tbody.appendChild(row);
+      });
+    }
+
+    updateTimes();
+    setInterval(updateTimes, 1000);
+  </script>
+</body>
+</html>
