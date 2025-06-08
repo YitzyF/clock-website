@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Free online clock tools: alarm, stopwatch, countdown, world clock, and reminders" />
-  <title>Online Clock</title>
+  <meta name="description" content="TopOnlineClock.com offers the best free online clock tools: digital clock, stopwatch, countdown timer, world clock, alarm, and reminders — all in one place!" />
+  <meta name="keywords" content="online clock, digital clock, stopwatch, countdown timer, alarm, world clock, reminders, TopOnlineClock" />
+  <meta name="author" content="TopOnlineClock.com" />
+  <title>Top Online Clock - Free Clock, Timer, Alarm & Reminder</title>
   <link rel="icon" href="https://vclock.com/favicon.ico">
   <style>
     * {
@@ -15,7 +17,7 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #000;
-      color: #00ff00;
+      color: #fff;
       text-align: center;
     }
     h1 {
@@ -23,12 +25,12 @@
       margin: 20px 0;
     }
     .main-clock {
-      font-size: 120px;
+      font-size: 100px;
       font-weight: bold;
-      margin: 40px 0 10px;
+      margin: 30px 0 10px;
     }
     .date {
-      font-size: 24px;
+      font-size: 22px;
       color: #ccc;
       margin-bottom: 30px;
     }
@@ -37,8 +39,8 @@
     }
     nav a {
       font-size: 18px;
-      margin: 0 15px;
-      color: #00ff00;
+      margin: 0 12px;
+      color: #00c3ff;
       text-decoration: none;
     }
     nav a:hover {
@@ -55,7 +57,7 @@
     .tool {
       background: #111;
       padding: 20px;
-      border: 2px solid #00ff00;
+      border: 2px solid #00c3ff;
       border-radius: 12px;
       width: 100%;
       text-align: center;
@@ -71,82 +73,43 @@
     }
     footer {
       margin: 60px 0 20px;
-      color: #444;
+      color: #555;
     }
   </style>
 </head>
 <body>
-  <h1>Online Clock</h1>
+  <h1>Top Online Clock</h1>
   <div class="main-clock" id="currentTime">00:00:00</div>
-  <div class="date" id="currentDate">Monday, January 1, 2025</div>
-
-  <!-- Google AdSense Homepage Banner -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9840828503182592"
-     crossorigin="anonymous"></script>
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-9840828503182592"
-       data-ad-slot="8616166621"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  <div class="date" id="currentDate">Loading date...</div>
 
   <nav>
-    <a href="#stopwatch">Stopwatch</a>
-    <a href="#countdown">Countdown</a>
-    <a href="#alarm">Alarm</a>
-    <a href="#worldclock">World Clock</a>
-    <a href="#reminder">Reminder</a>
+    <a href="stopwatch.html">Stopwatch</a>
+    <a href="countdown.html">Countdown</a>
+    <a href="alarm.html">Alarm</a>
+    <a href="reminder.html">Reminder</a>
+    <a href="worldclock.html">World Clock</a>
   </nav>
 
   <div class="tool-container">
-    <div class="tool" id="stopwatch">
-      <h2>Stopwatch</h2>
-      <p id="stopwatchDisplay">00:00:00</p>
-      <button onclick="startStopwatch()">Start</button>
-      <button onclick="stopStopwatch()">Stop</button>
-      <button onclick="resetStopwatch()">Reset</button>
+    <div class="tool">
+      <h2>About This Clock</h2>
+      <p>This is your free, full-screen online clock for displaying the current time with precision and clarity. No ads, no clutter — just a fast and accurate digital timepiece.</p>
     </div>
 
-    <div class="tool" id="countdown">
-      <h2>Countdown</h2>
-      <input type="datetime-local" id="countdownInput">
-      <button onclick="startCountdown()">Start</button>
-      <p id="countdownDisplay"></p>
-    </div>
-
-    <div class="tool" id="worldclock">
-      <h2>World Clock</h2>
-      <p>New York: <span id="nyClock"></span></p>
-      <p>London: <span id="ldnClock"></span></p>
-      <p>Tokyo: <span id="tokyoClock"></span></p>
-      <p>Paris: <span id="parisClock"></span></p>
-      <p>Sydney: <span id="sydneyClock"></span></p>
-      <p>Moscow: <span id="moscowClock"></span></p>
-      <p>Dubai: <span id="dubaiClock"></span></p>
-      <p>Los Angeles: <span id="laClock"></span></p>
-    </div>
-
-    <div class="tool" id="alarm">
-      <h2>Alarm</h2>
-      <input type="time" id="alarmTime">
-      <button onclick="setAlarm()">Set Alarm</button>
-      <p id="alarmStatus">No alarm set</p>
-    </div>
-
-    <div class="tool" id="reminder">
-      <h2>Reminder</h2>
-      <input type="datetime-local" id="reminderTime">
-      <input type="text" id="reminderMsg" placeholder="Reminder message">
-      <button onclick="setReminder()">Set Reminder</button>
-      <div id="reminderList"></div>
+    <div class="tool">
+      <h2>Features</h2>
+      <ul style="text-align: left; max-width: 400px; margin: auto; color: #aaa;">
+        <li>⏱️ Stopwatch for timing activities</li>
+        <li>⏳ Countdown timer with alarm</li>
+        <li>🔔 Alarm clock with alerts</li>
+        <li>🌍 World Clock for global time zones</li>
+        <li>📝 Smart reminders</li>
+      </ul>
     </div>
   </div>
 
   <footer>
-    <p>&copy; 2025 Online Clock</p>
+    <p>&copy; 2025 TopOnlineClock.com</p>
   </footer>
 
   <script>
@@ -159,118 +122,9 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
-
-    let stopwatchInterval;
-    let stopwatchTime = 0;
-    function startStopwatch() {
-      if (stopwatchInterval) return;
-      stopwatchInterval = setInterval(() => {
-        stopwatchTime++;
-        const hrs = String(Math.floor(stopwatchTime / 3600)).padStart(2, '0');
-        const mins = String(Math.floor((stopwatchTime % 3600) / 60)).padStart(2, '0');
-        const secs = String(stopwatchTime % 60).padStart(2, '0');
-        document.getElementById("stopwatchDisplay").textContent = `${hrs}:${mins}:${secs}`;
-      }, 1000);
-    }
-    function stopStopwatch() {
-      clearInterval(stopwatchInterval);
-      stopwatchInterval = null;
-    }
-    function resetStopwatch() {
-      stopStopwatch();
-      stopwatchTime = 0;
-      document.getElementById("stopwatchDisplay").textContent = "00:00:00";
-    }
-
-    let countdownInterval;
-    function startCountdown() {
-      const input = document.getElementById("countdownInput").value;
-      const display = document.getElementById("countdownDisplay");
-      const endTime = new Date(input);
-      if (!input || endTime <= new Date()) {
-        display.textContent = "Please select a valid future time.";
-        return;
-      }
-      clearInterval(countdownInterval);
-      countdownInterval = setInterval(() => {
-        const now = new Date();
-        const diff = endTime - now;
-        if (diff <= 0) {
-          clearInterval(countdownInterval);
-          display.textContent = "Countdown Complete!";
-          return;
-        }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const mins = Math.floor((diff / (1000 * 60)) % 60);
-        const secs = Math.floor((diff / 1000) % 60);
-        display.textContent = `${days}d ${hrs}h ${mins}m ${secs}s`;
-      }, 1000);
-    }
-
-    function updateWorldClock() {
-      const now = new Date();
-      document.getElementById("nyClock").textContent = now.toLocaleTimeString("en-US", { timeZone: "America/New_York" });
-      document.getElementById("ldnClock").textContent = now.toLocaleTimeString("en-GB", { timeZone: "Europe/London" });
-      document.getElementById("tokyoClock").textContent = now.toLocaleTimeString("ja-JP", { timeZone: "Asia/Tokyo" });
-      document.getElementById("parisClock").textContent = now.toLocaleTimeString("fr-FR", { timeZone: "Europe/Paris" });
-      document.getElementById("sydneyClock").textContent = now.toLocaleTimeString("en-AU", { timeZone: "Australia/Sydney" });
-      document.getElementById("moscowClock").textContent = now.toLocaleTimeString("ru-RU", { timeZone: "Europe/Moscow" });
-      document.getElementById("dubaiClock").textContent = now.toLocaleTimeString("ar-AE", { timeZone: "Asia/Dubai" });
-      document.getElementById("laClock").textContent = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles" });
-    }
-    setInterval(updateWorldClock, 1000);
-    updateWorldClock();
-
-    let alarmTime = null;
-    function setAlarm() {
-      const input = document.getElementById("alarmTime").value;
-      if (!input) return;
-      alarmTime = input;
-      document.getElementById("alarmStatus").textContent = `Alarm set for ${alarmTime}`;
-    }
-
-    let reminders = [];
-    function setReminder() {
-      const time = document.getElementById("reminderTime").value;
-      const msg = document.getElementById("reminderMsg").value;
-      if (!time || !msg) return;
-      const reminder = { time: new Date(time), message: msg };
-      reminders.push(reminder);
-      document.getElementById("reminderMsg").value = "";
-      updateReminderList();
-    }
-
-    function updateReminderList() {
-      const list = document.getElementById("reminderList");
-      list.innerHTML = "";
-      reminders.forEach((rem) => {
-        const div = document.createElement("div");
-        div.textContent = `${rem.time.toLocaleString()}: ${rem.message}`;
-        list.appendChild(div);
-      });
-    }
-
-    setInterval(() => {
-      const now = new Date();
-      const current = now.toTimeString().slice(0,5);
-      if (alarmTime === current) {
-        alert("⏰ Alarm! It's " + current);
-        alarmTime = null;
-        document.getElementById("alarmStatus").textContent = "No alarm set";
-      }
-
-      reminders = reminders.filter(rem => {
-        if (now >= rem.time) {
-          alert("🔔 Reminder: " + rem.message);
-          return false;
-        }
-        return true;
-      });
-      updateReminderList();
-    }, 1000);
   </script>
 </body>
 </html>
+
 
 
