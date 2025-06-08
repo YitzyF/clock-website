@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-adsense-account" content="ca-pub-9840828503182592">
-  <meta name="google-site-verification" content="I-5DwkSYS0i2lkjvupVYloMAn0IFp9SqLVPohejVSEc" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Top Online Clock with alarm, countdown, stopwatch, world clock, and reminder features. Free, accurate, and easy to use.">
-  <title>Top Online Clock - Alarm, Stopwatch, Countdown & World Clock</title>
+  <meta name="description" content="Free online clock tools: alarm, stopwatch, countdown, world clock, and reminders" />
+  <title>Online Clock</title>
   <link rel="icon" href="https://vclock.com/favicon.ico">
   <style>
     * {
@@ -75,10 +73,15 @@
       margin: 60px 0 20px;
       color: #444;
     }
+    /* AdSense ad container styling */
+    #adsense-ad {
+      margin: 30px auto;
+      max-width: 320px;
+    }
   </style>
 </head>
 <body>
-  <h1>Top Online Clock</h1>
+  <h1>Online Clock</h1>
   <div class="main-clock" id="currentTime">00:00:00</div>
   <div class="date" id="currentDate">Monday, January 1, 2025</div>
 
@@ -113,6 +116,7 @@
       <p>Tokyo: <span id="tokyoClock"></span></p>
       <p>Sydney: <span id="sydneyClock"></span></p>
       <p>Paris: <span id="parisClock"></span></p>
+      <p>Mumbai: <span id="mumbaiClock"></span></p>
     </div>
 
     <div class="tool" id="alarm">
@@ -131,11 +135,24 @@
     </div>
   </div>
 
+  <!-- Google AdSense code snippet -->
+  <div id="adsense-ad">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="1234567890"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  </div>
+
   <footer>
-    <p>&copy; 2025 Top Online Clock</p>
+    <p>&copy; 2025 Online Clock</p>
   </footer>
 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+
     function updateClock() {
       const now = new Date();
       document.getElementById("currentTime").textContent = now.toLocaleTimeString();
@@ -201,6 +218,7 @@
       document.getElementById("tokyoClock").textContent = now.toLocaleTimeString("ja-JP", { timeZone: "Asia/Tokyo" });
       document.getElementById("sydneyClock").textContent = now.toLocaleTimeString("en-AU", { timeZone: "Australia/Sydney" });
       document.getElementById("parisClock").textContent = now.toLocaleTimeString("fr-FR", { timeZone: "Europe/Paris" });
+      document.getElementById("mumbaiClock").textContent = now.toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" });
     }
     setInterval(updateWorldClock, 1000);
     updateWorldClock();
@@ -255,3 +273,4 @@
   </script>
 </body>
 </html>
+
