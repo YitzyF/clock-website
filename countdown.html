@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Countdown Timer - Set Countdown Alarms</title>
+  <meta name="description" content="Use our free online countdown timer. Set custom countdowns, alarms, and alerts. Works perfectly on desktop and mobile with sound options."/>
+  <meta name="keywords" content="countdown, countdown timer, online timer, alarm, countdown clock, set timer, online countdown"/>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2em;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    #countdown {
+      font-size: 4rem;
+      margin: 2rem 0;
+    }
+    input[type="number"] {
+      width: 4rem;
+      font-size: 1.5rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Online Countdown Timer</h1>
+  <p>Set your countdown timer below and get alerted when time is up!</p>
+
+  <div>
+    <input type="number" id="minutes" placeholder="Minutes" min="0" /> :
+    <input type="number" id="seconds" placeholder="Seconds" min="0" max="59" />
+  </div>
+  <div>
+    <button onclick="startCountdown()">Start</button>
+    <button onclick="resetCountdown()">Reset</button>
+  </div>
+  <div id="countdown">00:00</div>
+
+  <audio id="alarm" src="alarm.mp3" preload="auto"></audio>
+
+  <script>
+    let countdownInterval;
+
+    function startCountdown() {
+      const min = parseInt(document.getElementById('minutes').value) || 0;
+      const sec = parseInt(document.getElementById('seconds').value) || 0;
+      let totalSeconds = min * 60 + sec;
+
+      clearInterval(countdownInterval);
+
+      countdownInterval = setInterval(() => {
+        if (totalSeconds <= 0) {
+          clearInterval(countdownInterval);
+          document.getElementById('alarm').play();
+        }
+        const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+        const seconds = String(totalSeconds % 60).padStart(2, '0');
+        document.getElementById('countdown').textContent = `${minutes}:${seconds}`;
+        totalSeconds--;
+      }, 1000);
+    }
+
+    function resetCountdown() {
+      clearInterval(countdownInterval);
+      document.getElementById('countdown').textContent = "00:00";
+    }
+  </script>
+</body>
+</html>
