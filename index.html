@@ -2,111 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="TopOnlineClock.com offers the best free online clock tools: digital clock, stopwatch, countdown timer, world clock, alarm, and reminders — all in one place!" />
-  <meta name="keywords" content="online clock, digital clock, stopwatch, countdown timer, alarm, world clock, reminders, TopOnlineClock" />
-  <meta name="author" content="TopOnlineClock.com" />
-  <title>Top Online Clock - Free Clock, Timer, Alarm & Reminder</title>
-  <link rel="icon" href="https://vclock.com/favicon.ico">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #000;
-      color: #fff;
-      text-align: center;
-    }
-    h1 {
-      font-size: 48px;
-      margin: 20px 0;
-    }
-    .main-clock {
-      font-size: 100px;
-      font-weight: bold;
-      margin: 30px 0 10px;
-    }
-    .date {
-      font-size: 22px;
-      color: #ccc;
-      margin-bottom: 30px;
-    }
-    nav {
-      margin: 30px 0;
-    }
-    nav a {
-      font-size: 18px;
-      margin: 0 12px;
-      color: #00c3ff;
-      text-decoration: none;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    .tool-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-      margin: 40px auto;
-      max-width: 600px;
-    }
-    .tool {
-      background: #111;
-      padding: 20px;
-      border: 2px solid #00c3ff;
-      border-radius: 12px;
-      width: 100%;
-      text-align: center;
-    }
-    .tool h2 {
-      margin-bottom: 10px;
-    }
-    .tool input, .tool button {
-      padding: 10px;
-      margin: 5px 0;
-      width: 90%;
-      max-width: 300px;
-    }
-    footer {
-      margin: 60px 0 20px;
-      color: #555;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Top Online Clock with stopwatch, countdown, world clock, and reminders. Free, accurate, and simple.">
+  <meta name="keywords" content="online clock, alarm clock, countdown timer, stopwatch, world clock, reminders">
+  <meta name="author" content="TopOnlineClock">
+  <title>Top Online Clock</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9840828503182592" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>Top Online Clock</h1>
-  <div class="main-clock" id="currentTime">00:00:00</div>
-  <div class="date" id="currentDate">Loading date...</div>
+  <header>
+    <h1>Top Online Clock</h1>
+    <nav>
+      <a href="index.html">Clock</a>
+      <a href="stopwatch.html">Stopwatch</a>
+      <a href="countdown.html">Countdown</a>
+      <a href="worldclock.html">World Clock</a>
+      <a href="reminder.html">Reminders</a>
+    </nav>
+  </header>
 
-  <nav>
-    <a href="stopwatch.html">Stopwatch</a>
-    <a href="countdown.html">Countdown</a>
-    <a href="alarm.html">Alarm</a>
-    <a href="reminder.html">Reminder</a>
-    <a href="worldclock.html">World Clock</a>
-  </nav>
-
-  <div class="tool-container">
-    <div class="tool">
-      <h2>About This Clock</h2>
-      <p>This is your free, full-screen online clock for displaying the current time with precision and clarity. No ads, no clutter — just a fast and accurate digital timepiece.</p>
+  <main>
+    <div class="clock" id="clock"></div>
+    <div class="ad-container">
+      <!-- Homepage Banner Ad -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9840828503182592"
+           data-ad-slot="8616166621"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
-
-    <div class="tool">
-      <h2>Features</h2>
-      <ul style="text-align: left; max-width: 400px; margin: auto; color: #aaa;">
-        <li>⏱️ Stopwatch for timing activities</li>
-        <li>⏳ Countdown timer with alarm</li>
-        <li>🔔 Alarm clock with alerts</li>
-        <li>🌍 World Clock for global time zones</li>
-        <li>📝 Smart reminders</li>
-      </ul>
-    </div>
-  </div>
+  </main>
 
   <footer>
     <p>&copy; 2025 TopOnlineClock.com</p>
@@ -115,16 +46,14 @@
   <script>
     function updateClock() {
       const now = new Date();
-      document.getElementById("currentTime").textContent = now.toLocaleTimeString();
-      document.getElementById("currentDate").textContent = now.toLocaleDateString(undefined, {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-      });
+      document.getElementById('clock').innerText = now.toLocaleTimeString();
     }
     setInterval(updateClock, 1000);
     updateClock();
   </script>
 </body>
 </html>
+
 
 
 
