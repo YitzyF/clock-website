@@ -19,7 +19,14 @@
       <a href="worldclock.html">World Clock</a>
       <a href="reminder.html">Reminders</a>
     </nav>
+
+    <div id="date" class="date"></div>
     <div id="clock" class="clock"></div>
+
+    <div class="alarm-toggle">
+      <label for="alarmCheckbox">🔔 Alarm</label>
+      <input type="checkbox" id="alarmCheckbox">
+    </div>
 
     <!-- Ad banner -->
     <div class="ad-container">
@@ -34,9 +41,28 @@
       </script>
     </div>
   </div>
-  <script src="script.js"></script>
+
+  <script>
+    function updateClockAndDate() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      const timeStr = `${h}:${m}:${s}`;
+
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const dateStr = now.toLocaleDateString(undefined, options);
+
+      document.getElementById("clock").textContent = timeStr;
+      document.getElementById("date").textContent = dateStr;
+    }
+
+    setInterval(updateClockAndDate, 1000);
+    updateClockAndDate();
+  </script>
 </body>
 </html>
+
 
 
 
