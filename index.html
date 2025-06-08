@@ -2,31 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Top Online Clock with stopwatch, countdown, world clock, and reminders. Free, accurate, and simple.">
-  <meta name="keywords" content="online clock, alarm clock, countdown timer, stopwatch, world clock, reminders">
-  <meta name="author" content="TopOnlineClock">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Top Online Clock - Digital Clock, Stopwatch, Countdown, World Clock, and Reminders in one!" />
   <title>Top Online Clock</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9840828503182592" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
+  <div class="container">
     <h1>Top Online Clock</h1>
     <nav>
-      <a href="index.html">Clock</a>
+      <a href="index.html">Home</a>
       <a href="stopwatch.html">Stopwatch</a>
       <a href="countdown.html">Countdown</a>
       <a href="worldclock.html">World Clock</a>
       <a href="reminder.html">Reminders</a>
     </nav>
-  </header>
+    <div id="clock" class="clock"></div>
 
-  <main>
-    <div class="clock" id="clock"></div>
+    <!-- Ad banner -->
     <div class="ad-container">
-      <!-- Homepage Banner Ad -->
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-9840828503182592"
@@ -37,23 +33,10 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 TopOnlineClock.com</p>
-  </footer>
-
-  <script>
-    function updateClock() {
-      const now = new Date();
-      document.getElementById('clock').innerText = now.toLocaleTimeString();
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
-
 
 
 
