@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free online stopwatch. Simple, accurate stopwatch timer you can use on any device without downloading an app." />
+  <meta name="keywords" content="stopwatch, online stopwatch, digital stopwatch, free stopwatch, simple stopwatch, stopwatch timer" />
+  <meta name="author" content="TopOnlineClock.com" />
+  <title>Free Online Stopwatch | TopOnlineClock</title>
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 48px;
+      margin: 40px 0 20px;
+    }
+    #stopwatchDisplay {
+      font-size: 72px;
+      margin: 40px 0;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 18px;
+      background-color: #333;
+      color: white;
+      border: 1px solid #555;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
+    footer {
+      margin-top: 80px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Online Stopwatch</h1>
+  <div id="stopwatchDisplay">00:00:00</div>
+  <button onclick="startStopwatch()">Start</button>
+  <button onclick="stopStopwatch()">Stop</button>
+  <button onclick="resetStopwatch()">Reset</button>
+
+  <footer>
+    <p>&copy; 2025 TopOnlineClock.com</p>
+  </footer>
+
+  <script>
+    let stopwatchInterval;
+    let stopwatchTime = 0;
+
+    function updateStopwatchDisplay() {
+      const hrs = String(Math.floor(stopwatchTime / 3600)).padStart(2, '0');
+      const mins = String(Math.floor((stopwatchTime % 3600) / 60)).padStart(2, '0');
+      const secs = String(stopwatchTime % 60).padStart(2, '0');
+      document.getElementById("stopwatchDisplay").textContent = `${hrs}:${mins}:${secs}`;
+    }
+
+    function startStopwatch() {
+      if (stopwatchInterval) return;
+      stopwatchInterval = setInterval(() => {
+        stopwatchTime++;
+        updateStopwatchDisplay();
+      }, 1000);
+    }
+
+    function stopStopwatch() {
+      clearInterval(stopwatchInterval);
+      stopwatchInterval = null;
+    }
+
+    function resetStopwatch() {
+      stopStopwatch();
+      stopwatchTime = 0;
+      updateStopwatchDisplay();
+    }
+
+    updateStopwatchDisplay();
+  </script>
+</body>
+</html>
