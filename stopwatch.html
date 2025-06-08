@@ -2,91 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Free online stopwatch. Simple, accurate stopwatch timer you can use on any device without downloading an app." />
-  <meta name="keywords" content="stopwatch, online stopwatch, digital stopwatch, free stopwatch, simple stopwatch, stopwatch timer" />
-  <meta name="author" content="TopOnlineClock.com" />
-  <title>Free Online Stopwatch | TopOnlineClock</title>
-  <link rel="icon" href="/favicon.ico">
-  <style>
-    body {
-      background-color: #0a0a0a;
-      color: #f0f0f0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      font-size: 48px;
-      margin: 40px 0 20px;
-    }
-    #stopwatchDisplay {
-      font-size: 72px;
-      margin: 40px 0;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 18px;
-      background-color: #333;
-      color: white;
-      border: 1px solid #555;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #555;
-    }
-    footer {
-      margin-top: 80px;
-      font-size: 14px;
-      color: #888;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Use the free online stopwatch from Top Online Clock. Simple, accurate, and easy to use.">
+  <meta name="keywords" content="stopwatch, online stopwatch, free stopwatch, timer, digital stopwatch">
+  <meta name="author" content="TopOnlineClock">
+  <title>Stopwatch - Top Online Clock</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9840828503182592" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>Online Stopwatch</h1>
-  <div id="stopwatchDisplay">00:00:00</div>
-  <button onclick="startStopwatch()">Start</button>
-  <button onclick="stopStopwatch()">Stop</button>
-  <button onclick="resetStopwatch()">Reset</button>
+  <header>
+    <h1>Stopwatch</h1>
+    <nav>
+      <a href="index.html">Clock</a>
+      <a href="stopwatch.html" class="active">Stopwatch</a>
+      <a href="countdown.html">Countdown</a>
+      <a href="worldclock.html">World Clock</a>
+      <a href="reminder.html">Reminders</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="stopwatch">
+      <div id="display">00:00:00.000</div>
+      <div class="controls">
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
+        <button onclick="reset()">Reset</button>
+      </div>
+    </div>
+
+    <div class="ad-container">
+      <!-- Stopwatch Ad -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9840828503182592"
+           data-ad-slot="8616166621"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </main>
 
   <footer>
     <p>&copy; 2025 TopOnlineClock.com</p>
   </footer>
 
   <script>
-    let stopwatchInterval;
-    let stopwatchTime = 0;
-
-    function updateStopwatchDisplay() {
-      const hrs = String(Math.floor(stopwatchTime / 3600)).padStart(2, '0');
-      const mins = String(Math.floor((stopwatchTime % 3600) / 60)).padStart(2, '0');
-      const secs = String(stopwatchTime % 60).padStart(2, '0');
-      document.getElementById("stopwatchDisplay").textContent = `${hrs}:${mins}:${secs}`;
+    let startTime, interval;
+    function start() {
+      if (!interval) {
+        startTime = Date.now() - (startTime || 0);
+        interval = setInterval(update, 10);
+      }
     }
 
-    function startStopwatch() {
-      if (stopwatchInterval) return;
-      stopwatchInterval = setInterval(() => {
-        stopwatchTime++;
-        updateStopwatchDisplay();
-      }, 1000);
+    function stop() {
+      clearInterval(interval);
+      interval = null;
     }
 
-    function stopStopwatch() {
-      clearInterval(stopwatchInterval);
-      stopwatchInterval = null;
+    function reset() {
+      clearInterval(interval);
+      interval = null;
+      startTime = 0;
+      document.getElementById('display').innerText = "00:00:00.000";
     }
 
-    function resetStopwatch() {
-      stopStopwatch();
-      stopwatchTime = 0;
-      updateStopwatchDisplay();
+    function update() {
+      const elapsed = Date.now() - startTime;
+      const date = new Date(elapsed);
+      const h = String(date.getUTCHours()).padStart(2, '0');
+      const m = String(date.getUTCMinutes()).padStart(2, '0');
+      const s = String(date.getUTCSeconds()).padStart(2, '0');
+      const ms = String(date.getUTCMilliseconds()).padStart(3, '0');
+      document.getElementById('display').innerText = `${h}:${m}:${s}.${ms}`;
     }
-
-    updateStopwatchDisplay();
   </script>
 </body>
 </html>
+
