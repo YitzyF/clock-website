@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Top Online Clock - Digital Clock, Stopwatch, Countdown, World Clock, and Reminders in one!" />
+  <meta name="description" content="Top Online Clock - Clock, Timer, Stopwatch, World Clock, and Reminders" />
   <title>Top Online Clock</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -11,24 +11,18 @@
 </head>
 <body>
   <div class="container">
-    <h1>Top Online Clock</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="stopwatch.html">Stopwatch</a>
-      <a href="countdown.html">Countdown</a>
-      <a href="worldclock.html">World Clock</a>
-      <a href="reminder.html">Reminders</a>
-    </nav>
-
-    <div id="date" class="date"></div>
+    <div class="header">
+      <h1>Top Online Clock</h1>
+      <nav>
+        <a href="index.html">Clock</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="countdown.html">Countdown</a>
+        <a href="worldclock.html">World Clock</a>
+        <a href="reminder.html">Reminders</a>
+      </nav>
+    </div>
     <div id="clock" class="clock"></div>
 
-    <div class="alarm-toggle">
-      <label for="alarmCheckbox">🔔 Alarm</label>
-      <input type="checkbox" id="alarmCheckbox">
-    </div>
-
-    <!-- Ad banner -->
     <div class="ad-container">
       <ins class="adsbygoogle"
            style="display:block"
@@ -41,28 +35,9 @@
       </script>
     </div>
   </div>
-
-  <script>
-    function updateClockAndDate() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      const s = String(now.getSeconds()).padStart(2, '0');
-      const timeStr = `${h}:${m}:${s}`;
-
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const dateStr = now.toLocaleDateString(undefined, options);
-
-      document.getElementById("clock").textContent = timeStr;
-      document.getElementById("date").textContent = dateStr;
-    }
-
-    setInterval(updateClockAndDate, 1000);
-    updateClockAndDate();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
-
 
 
 
