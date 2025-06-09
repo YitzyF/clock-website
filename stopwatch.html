@@ -2,39 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Use the free online stopwatch from Top Online Clock. Simple, accurate, and easy to use.">
-  <meta name="keywords" content="stopwatch, online stopwatch, free stopwatch, timer, digital stopwatch">
-  <meta name="author" content="TopOnlineClock">
-  <title>Stopwatch - Top Online Clock</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Online Stopwatch - Free and easy-to-use stopwatch for timing events and activities. Start, stop, and reset with precision." />
+  <title>Online Stopwatch</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9840828503182592" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <h1>Stopwatch</h1>
-    <nav>
-      <a href="index.html">Clock</a>
-      <a href="stopwatch.html" class="active">Stopwatch</a>
-      <a href="countdown.html">Countdown</a>
-      <a href="worldclock.html">World Clock</a>
-      <a href="reminder.html">Reminders</a>
-    </nav>
-  </header>
+  <div class="container">
+    <div class="header">
+      <h1>Stopwatch</h1>
+      <nav>
+        <a href="index.html">Clock</a>
+        <a href="stopwatch.html" class="active">Stopwatch</a>
+        <a href="countdown.html">Countdown</a>
+        <a href="worldclock.html">World Clock</a>
+        <a href="reminder.html">Reminders</a>
+      </nav>
+    </div>
 
-  <main>
-    <div class="stopwatch">
-      <div id="display">00:00:00.000</div>
-      <div class="controls">
-        <button onclick="start()">Start</button>
-        <button onclick="stop()">Stop</button>
-        <button onclick="reset()">Reset</button>
+    <div class="content">
+      <div id="stopwatch" class="stopwatch">
+        <span id="time">00:00:00</span>
+        <div class="controls">
+          <button onclick="startStopwatch()">Start</button>
+          <button onclick="stopStopwatch()">Stop</button>
+          <button onclick="resetStopwatch()">Reset</button>
+        </div>
       </div>
+
+      <section class="description">
+        <h2>Online Stopwatch</h2>
+        <p>This free online stopwatch is perfect for timing exercises, studying, cooking, or any other activities that require precise time tracking. Simple controls let you start, stop, and reset at any time. It works directly in your browser — no downloads needed!</p>
+      </section>
     </div>
 
     <div class="ad-container">
-      <!-- Stopwatch Ad -->
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-9840828503182592"
@@ -45,43 +49,10 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
-  </main>
+  </div>
 
-  <footer>
-    <p>&copy; 2025 TopOnlineClock.com</p>
-  </footer>
-
-  <script>
-    let startTime, interval;
-    function start() {
-      if (!interval) {
-        startTime = Date.now() - (startTime || 0);
-        interval = setInterval(update, 10);
-      }
-    }
-
-    function stop() {
-      clearInterval(interval);
-      interval = null;
-    }
-
-    function reset() {
-      clearInterval(interval);
-      interval = null;
-      startTime = 0;
-      document.getElementById('display').innerText = "00:00:00.000";
-    }
-
-    function update() {
-      const elapsed = Date.now() - startTime;
-      const date = new Date(elapsed);
-      const h = String(date.getUTCHours()).padStart(2, '0');
-      const m = String(date.getUTCMinutes()).padStart(2, '0');
-      const s = String(date.getUTCSeconds()).padStart(2, '0');
-      const ms = String(date.getUTCMilliseconds()).padStart(3, '0');
-      document.getElementById('display').innerText = `${h}:${m}:${s}.${ms}`;
-    }
-  </script>
+  <script src="stopwatch.js"></script>
 </body>
 </html>
+
 
