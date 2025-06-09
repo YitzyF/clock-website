@@ -2,99 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Online World Clock - Current Time in Cities Worldwide</title>
-  <meta name="description" content="Check the current time in major cities around the world. Online world clock with multiple city times." />
-  <meta name="keywords" content="world clock, time zones, current time, cities time, online clock, international time" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="View the current time in major cities around the world. Stay updated with multiple global timezones." />
+  <title>World Clock - Top Online Clock</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="favicon.ico" />
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 2rem;
-    }
-    h1 {
-      margin-bottom: 1rem;
-    }
-    table {
-      margin: 0 auto;
-      border-collapse: collapse;
-      width: 90%;
-      max-width: 600px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 0.5rem 1rem;
-    }
-    th {
-      background-color: #333;
-      color: white;
-    }
-    td {
-      font-size: 1.1rem;
-    }
-  </style>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9840828503182592" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>World Clock</h1>
-  <p>Current time in major cities around the world:</p>
+  <div class="container">
+    <div class="header">
+      <h1>World Clock</h1>
+      <nav>
+        <a href="index.html">Clock</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="countdown.html">Countdown</a>
+        <a href="worldclock.html" class="active">World Clock</a>
+        <a href="reminder.html">Reminders</a>
+      </nav>
+    </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>City</th>
-        <th>Time</th>
-      </tr>
-    </thead>
-    <tbody id="clockTableBody">
-      <!-- Time rows will be inserted here -->
-    </tbody>
-  </table>
+    <div class="content">
+      <div class="worldclock-grid" id="worldClocks">
+        <!-- Timezones will be inserted here -->
+      </div>
+
+      <section class="description">
+        <h2>Current Time in Cities Worldwide</h2>
+        <p>Use this world clock to check the local time in major cities globally. Useful for scheduling meetings, tracking markets, or connecting with friends and family across timezones.</p>
+      </section>
+    </div>
+
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9840828503182592"
+           data-ad-slot="8616166621"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
 
   <script>
     const cities = [
-      { name: 'New York, USA', timezone: 'America/New_York' },
-      { name: 'London, UK', timezone: 'Europe/London' },
-      { name: 'Paris, France', timezone: 'Europe/Paris' },
-      { name: 'Tokyo, Japan', timezone: 'Asia/Tokyo' },
-      { name: 'Sydney, Australia', timezone: 'Australia/Sydney' },
-      { name: 'Moscow, Russia', timezone: 'Europe/Moscow' },
-      { name: 'Dubai, UAE', timezone: 'Asia/Dubai' },
-      { name: 'Beijing, China', timezone: 'Asia/Shanghai' },
-      { name: 'Los Angeles, USA', timezone: 'America/Los_Angeles' },
-      { name: 'São Paulo, Brazil', timezone: 'America/Sao_Paulo' }
+      { name: "New York", tz: "America/New_York" },
+      { name: "London", tz: "Europe/London" },
+      { name: "Tokyo", tz: "Asia/Tokyo" },
+      { name: "Sydney", tz: "Australia/Sydney" },
+      { name: "Dubai", tz: "Asia/Dubai" },
+      { name: "Paris", tz: "Europe/Paris" },
+      { name: "Los Angeles", tz: "America/Los_Angeles" },
+      { name: "Sao Paulo", tz: "America/Sao_Paulo" }
     ];
 
-    function updateTimes() {
-      const tbody = document.getElementById('clockTableBody');
-      tbody.innerHTML = '';
-
-      const now = new Date();
+    function updateWorldClocks() {
+      const container = document.getElementById("worldClocks");
+      container.innerHTML = "";
 
       cities.forEach(city => {
-        const timeString = now.toLocaleTimeString('en-US', {
-          timeZone: city.timezone,
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
+        const now = new Date().toLocaleTimeString("en-US", {
+          timeZone: city.tz,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
           hour12: false
         });
 
-        const row = document.createElement('tr');
-        const cityCell = document.createElement('td');
-        cityCell.textContent = city.name;
-        const timeCell = document.createElement('td');
-        timeCell.textContent = timeString;
-
-        row.appendChild(cityCell);
-        row.appendChild(timeCell);
-        tbody.appendChild(row);
+        const div = document.createElement("div");
+        div.className = "worldclock-card";
+        div.innerHTML = `<strong>${city.name}</strong><div>${now}</div>`;
+        container.appendChild(div);
       });
     }
 
-    updateTimes();
-    setInterval(updateTimes, 1000);
+    setInterval(updateWorldClocks, 1000);
+    updateWorldClocks();
   </script>
 </body>
 </html>
+
