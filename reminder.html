@@ -2,82 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Online Reminder & Alarm - Set Custom Reminders</title>
-  <meta name="description" content="Set reminders and alarms online. Get notifications with sound alerts at your chosen time." />
-  <meta name="keywords" content="reminder, alarm, online alarm, set reminder, alarm clock, notification" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Set browser-based reminders and alerts to stay organized and productive." />
+  <title>Reminders - Top Online Clock</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="favicon.ico" />
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 2rem;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    input, button {
-      font-size: 1rem;
-      padding: 0.5rem;
-      margin: 0.5rem 0;
-    }
-    #message {
-      margin-top: 2rem;
-      font-size: 1.2rem;
-      color: green;
-    }
-  </style>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9840828503182592" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>Set a Reminder / Alarm</h1>
-  <p>Pick a time and enter a message to get reminded.</p>
+  <div class="container">
+    <div class="header">
+      <h1>Reminders</h1>
+      <nav>
+        <a href="index.html">Clock</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="countdown.html">Countdown</a>
+        <a href="worldclock.html">World Clock</a>
+        <a href="reminder.html" class="active">Reminders</a>
+      </nav>
+    </div>
 
-  <label for="reminderTime">Reminder Time:</label><br />
-  <input type="time" id="reminderTime" required /><br />
+    <div class="content">
+      <div class="reminder-form">
+        <input type="text" id="reminderInput" placeholder="Enter your reminder..." />
+        <button onclick="addReminder()">Add Reminder</button>
+      </div>
 
-  <label for="reminderText">Reminder Message:</label><br />
-  <input type="text" id="reminderText" placeholder="Enter your message" required /><br />
+      <ul id="reminderList" class="reminder-list"></ul>
 
-  <button onclick="setReminder()">Set Reminder</button>
+      <section class="description">
+        <h2>Stay Organized with Smart Reminders</h2>
+        <p>This tool lets you set simple reminders directly in your browser — no sign-up required. They persist even if you refresh the page or close your browser.</p>
+      </section>
+    </div>
 
-  <div id="message"></div>
-
-  <audio id="alarmSound" src="alarm.mp3" preload="auto"></audio>
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9840828503182592"
+           data-ad-slot="8616166621"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
 
   <script>
-    let reminderTimeout;
-
-    function setReminder() {
-      clearTimeout(reminderTimeout);
-
-      const timeInput = document.getElementById('reminderTime').value;
-      const messageInput = document.getElementById('reminderText').value.trim();
-
-      if (!timeInput || !messageInput) {
-        alert('Please enter both time and message.');
-        return;
-      }
-
-      const now = new Date();
-      const [hours, minutes] = timeInput.split(':').map(Number);
-      const reminderTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, 0);
-
-      // If reminder time has already passed today, set for tomorrow
-      if (reminderTime <= now) {
-        reminderTime.setDate(reminderTime.getDate() + 1);
-      }
-
-      const timeToReminder = reminderTime - now;
-
-      document.getElementById('message').textContent = `Reminder set for ${reminderTime.toLocaleTimeString()}`;
-
-      reminderTimeout = setTimeout(() => {
-        alert(messageInput);
-        document.getElementById('alarmSound').play();
-      }, timeToReminder);
+    function loadReminders() {
+      const saved = localStorage.getItem("reminders");
+      return saved ? JSON.parse(saved) : [];
     }
+
+    function saveReminders(reminders) {
+      localStorage.setItem("reminders", JSON.stringify(reminders));
+    }
+
+    function renderReminders() {
+      const list = document.getElementById("reminderList");
+      list.innerHTML = "";
+      const reminders = loadReminders();
+
+      reminders.forEach((reminder, index) => {
+        const li = document.createElement("li");
+        li.textContent = reminder;
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "×";
+        delBtn.className = "delete-btn";
+        delBtn.onclick = () => {
+          reminders.splice(index, 1);
+          saveReminders(reminders);
+          renderReminders();
+        };
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      });
+    }
+
+    function addReminder() {
+      const input = document.getElementById("reminderInput");
+      const value = input.value.trim();
+      if (value) {
+        const reminders = loadReminders();
+        reminders.push(value);
+        saveReminders(reminders);
+        input.value = "";
+        renderReminders();
+      }
+    }
+
+    renderReminders();
   </script>
 </body>
 </html>
+
