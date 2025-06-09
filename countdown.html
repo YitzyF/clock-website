@@ -2,78 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Online Countdown Timer - Set Countdown Alarms</title>
-  <meta name="description" content="Use our free online countdown timer. Set custom countdowns, alarms, and alerts. Works perfectly on desktop and mobile with sound options."/>
-  <meta name="keywords" content="countdown, countdown timer, online timer, alarm, countdown clock, set timer, online countdown"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free online countdown timer. Set your own countdown for events, tasks, or breaks with alerts and full-screen mode." />
+  <title>Countdown Timer - Top Online Clock</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="favicon.ico" />
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 2em;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    #countdown {
-      font-size: 4rem;
-      margin: 2rem 0;
-    }
-    input[type="number"] {
-      width: 4rem;
-      font-size: 1.5rem;
-    }
-    button {
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-    }
-  </style>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9840828503182592" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>Online Countdown Timer</h1>
-  <p>Set your countdown timer below and get alerted when time is up!</p>
+  <div class="container">
+    <div class="header">
+      <h1>Countdown Timer</h1>
+      <nav>
+        <a href="index.html">Clock</a>
+        <a href="stopwatch.html">Stopwatch</a>
+        <a href="countdown.html" class="active">Countdown</a>
+        <a href="worldclock.html">World Clock</a>
+        <a href="reminder.html">Reminders</a>
+      </nav>
+    </div>
 
-  <div>
-    <input type="number" id="minutes" placeholder="Minutes" min="0" /> :
-    <input type="number" id="seconds" placeholder="Seconds" min="0" max="59" />
-  </div>
-  <div>
-    <button onclick="startCountdown()">Start</button>
-    <button onclick="resetCountdown()">Reset</button>
-  </div>
-  <div id="countdown">00:00</div>
+    <div class="content">
+      <div class="countdown">
+        <label>
+          Minutes:
+          <input type="number" id="minutes" min="0" value="1">
+        </label>
+        <label>
+          Seconds:
+          <input type="number" id="seconds" min="0" value="0">
+        </label>
+        <div class="buttons">
+          <button onclick="startCountdown()">Start</button>
+          <button onclick="resetCountdown()">Reset</button>
+        </div>
+        <div id="timerDisplay" class="clock">01:00</div>
+      </div>
 
-  <audio id="alarm" src="alarm.mp3" preload="auto"></audio>
+      <section class="description">
+        <h2>Online Countdown Timer</h2>
+        <p>Use this free countdown timer for tasks, events, study sessions, workouts, or breaks. Customize minutes and seconds, start when ready, and get alerted when time’s up.</p>
+      </section>
+    </div>
+
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9840828503182592"
+           data-ad-slot="8616166621"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
 
   <script>
     let countdownInterval;
-
     function startCountdown() {
-      const min = parseInt(document.getElementById('minutes').value) || 0;
-      const sec = parseInt(document.getElementById('seconds').value) || 0;
-      let totalSeconds = min * 60 + sec;
+      const min = parseInt(document.getElementById("minutes").value, 10);
+      const sec = parseInt(document.getElementById("seconds").value, 10);
+      let time = min * 60 + sec;
 
+      updateDisplay(time);
       clearInterval(countdownInterval);
-
       countdownInterval = setInterval(() => {
-        if (totalSeconds <= 0) {
+        time--;
+        updateDisplay(time);
+        if (time <= 0) {
           clearInterval(countdownInterval);
-          document.getElementById('alarm').play();
+          alert("Time’s up!");
         }
-        const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
-        const seconds = String(totalSeconds % 60).padStart(2, '0');
-        document.getElementById('countdown').textContent = `${minutes}:${seconds}`;
-        totalSeconds--;
       }, 1000);
     }
 
     function resetCountdown() {
       clearInterval(countdownInterval);
-      document.getElementById('countdown').textContent = "00:00";
+      document.getElementById("minutes").value = 1;
+      document.getElementById("seconds").value = 0;
+      updateDisplay(60);
     }
+
+    function updateDisplay(time) {
+      const m = Math.floor(time / 60);
+      const s = time % 60;
+      document.getElementById("timerDisplay").textContent =
+        `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    // Initial display
+    updateDisplay(60);
   </script>
 </body>
 </html>
+
